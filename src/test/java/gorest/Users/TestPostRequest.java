@@ -1,6 +1,8 @@
 package gorest.Users;
 
 import com.jayway.jsonpath.Configuration;
+import io.restassured.http.ContentType;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,18 +10,23 @@ import utills.ReadFile;
 import utills.SubSequentCalls;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_CREATED;
 
+/**
+ * Created by Saurabh Kumar. Using fake APIs https://dummyjson.com/
+ */
+
 public class TestPostRequest {
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TestGetRequest.class);
     Map<String, String> headerProperties;
     SubSequentCalls ssc = new SubSequentCalls();
     String baseURI;
-    String postPath;
+    String userAdd;
     Properties properties;
     String token;
 
@@ -36,8 +43,9 @@ public class TestPostRequest {
             if (baseURI == null){
                 baseURI = properties.getProperty("HOST");
             }
-            postPath = properties.getProperty("PostPath");
+            userAdd = properties.getProperty("UserAdd");
             token = ssc.getToken();
+
         }catch (Exception e){
             logger.error("Exception found at pre-condition: ", e);
             Assert.fail("Exception found at pre-condition: "+ e.getMessage(), e);
@@ -47,8 +55,19 @@ public class TestPostRequest {
     @Test
     public void verifyResponse201(){
         try{
-            given().baseUri(baseURI).basePath(postPath).headers(headerProperties).log().all().when().post().then().
-                    assertThat().statusCode(SC_CREATED).log().all();
+            Map<String, Object> map = new HashMap<String, Object>();
+            JSONObject jsonObject = new JSONObject(map);
+            jsonObject.put("firstName", "Saurabh");
+            jsonObject.put("lastName", "Kumar");
+            jsonObject.put("age", "29");
+
+            String addData = jsonObject.toJSONString();
+            System.out.println(addData);
+
+            // Adding data to POST API
+            given().baseUri(baseURI).contentType(ContentType.JSON).accept(ContentType.JSON).
+                    body(addData).when().post(userAdd).then().assertThat().statusCode(SC_CREATED).log().all();
+
         }catch (Exception e){
             logger.info("Exception found: ", e);
             Assert.fail("Exception found: " + e.getMessage(), e);

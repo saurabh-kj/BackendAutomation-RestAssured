@@ -95,13 +95,12 @@ public class TestGetRequest {
     /*@Test(priority = 3)
     public void verifyBlondHairUsers(){
         try {
-            Response response = given().baseUri(baseURI).basePath(userPath).when().get().then().
-                    assertThat().statusCode(SC_OK)
-                            .extract().response();
-//            DocumentContext dc = JsonPath.using(configuration).parse(response);
-            Map<String, String> map = response.jsonPath().getMap("users.hair");
-            System.out.println(map.get("color"));
+//            given().baseUri(baseURI).basePath(userPath).get("/filter?key=hair.color=Black").
+//                    then().assertThat().statusCode(SC_OK).extract().response();
 //            System.out.println(response.getBody().prettyPrint());
+            given().baseUri(baseURI).baseUri(userPath).queryParam("key", "hair.color=Black").get("/filter").
+                    getBody().prettyPrint();
+//            System.out.println(res.getBody().prettyPrint());
         }catch (Exception e){
 
         }
