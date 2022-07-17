@@ -2,6 +2,7 @@ package gorest.Users;
 
 import com.jayway.jsonpath.Configuration;
 import io.restassured.http.Method;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.core.IsNull;
 import org.testng.Assert;
@@ -27,6 +28,7 @@ public class TestGetRequest {
     String userPath;
     Properties properties;
     String token;
+    String userID = "2";
 
     private static Configuration configuration = Configuration.defaultConfiguration();
 
@@ -89,6 +91,46 @@ public class TestGetRequest {
         }catch (Exception e){
             logger.error("Exception: ", e);
             Assert.fail("Exception thrown Test case failed :" + e.getMessage(), e);
+        }
+    }
+
+    @Test(priority = 3)
+    public void readDataByID(){
+        try{
+            String userID = "2";
+            given().baseUri(baseURI).basePath(userPath).get(userID).then().assertThat().
+                    statusCode(SC_OK).log().all();
+        }catch (Exception e){
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
+        }
+    }
+
+    @Test(priority = 4)
+    public void fetchParticulerField(){
+        try {
+            Response response = given().baseUri(baseURI).basePath(userPath).get(userID).then().assertThat().
+                    statusCode(SC_OK).extract().response();
+            JsonPath jPath = response.jsonPath();
+
+            //Fetch First Name
+            String fname = jPath.get("firstName");
+            System.out.println("First Name: " + fname);
+
+            //Fetch hair color
+            String hairColor = jPath.get("hair.color");
+            System.out.println(fname +"'s hair color is: " + hairColor);
+
+            //Fetch user's address
+            String address = jPath.get("address.address");
+            System.out.println(fname + "'s address is: " + address);
+
+            //Fetch user's city
+            String city = jPath.get("address.city");
+            System.out.println(fname + "'s city is: " + city);
+        }catch (Exception e){
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 
