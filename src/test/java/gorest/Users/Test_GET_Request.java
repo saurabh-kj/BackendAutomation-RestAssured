@@ -21,8 +21,8 @@ import static org.hamcrest.Matchers.hasItems;
  * Created by Saurabh Kumar. Using fake APIs https://dummyjson.com/
  */
 
-public class TestGetRequest {
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TestGetRequest.class);
+public class Test_GET_Request {
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Test_GET_Request.class);
     SubSequentCalls ssc = new SubSequentCalls();
     String baseURI;
     String userPath;
@@ -134,7 +134,7 @@ public class TestGetRequest {
         }
     }
 
-    /*@Test(priority = 3)
+    /*@Test
     public void verifyBlondHairUsers(){
         try {
 //            given().baseUri(baseURI).basePath(userPath).get("/filter?key=hair.color=Black").

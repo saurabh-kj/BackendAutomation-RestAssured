@@ -21,8 +21,8 @@ import static org.apache.http.HttpStatus.SC_CREATED;
  * Created by Saurabh Kumar. Using fake APIs https://dummyjson.com/
  */
 
-public class TestPostRequest {
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TestGetRequest.class);
+public class Test_POST_Request {
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Test_GET_Request.class);
     Map<String, String> headerProperties;
     SubSequentCalls ssc = new SubSequentCalls();
     String baseURI;
