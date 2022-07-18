@@ -1,4 +1,4 @@
-package gorest.Users;
+package dummyJSON.Users;
 
 import com.jayway.jsonpath.Configuration;
 import io.restassured.http.ContentType;
@@ -15,6 +15,10 @@ import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
+
+/**
+ * Created by Saurabh Kumar. Using fake APIs https://dummyjson.com/
+ */
 
 public class Test_PUTandPATCH_Request {
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Test_GET_Request.class);
@@ -67,8 +71,8 @@ public class Test_PUTandPATCH_Request {
                     accept(ContentType.JSON).body(updateValue).put(userID).then().assertThat().
                     statusCode(SC_OK).log().all();
         }catch (Exception e){
-            logger.info("Exception found: ", e);
-            Assert.fail("Exception found: " + e.getMessage(), e);
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 
@@ -93,8 +97,8 @@ public class Test_PUTandPATCH_Request {
                     accept(ContentType.JSON).body(updateValue).patch(userID).then().assertThat().
                     statusCode(SC_OK).log().all();
         }catch (Exception e){
-            logger.info("Exception found: ", e);
-            Assert.fail("Exception found: " + e.getMessage(), e);
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 

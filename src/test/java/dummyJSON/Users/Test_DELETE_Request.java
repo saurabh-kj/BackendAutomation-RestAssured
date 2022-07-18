@@ -1,4 +1,4 @@
-package gorest.Users;
+package dummyJSON.Users;
 
 import com.jayway.jsonpath.Configuration;
 import org.testng.Assert;
@@ -10,7 +10,11 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_OK;
+
+/**
+ * Created by Saurabh Kumar. Using fake APIs https://dummyjson.com/
+ */
 
 public class Test_DELETE_Request {
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Test_GET_Request.class);
@@ -43,7 +47,12 @@ public class Test_DELETE_Request {
 
     @Test(priority = 0)
     public void deleteUser(){
-        given().baseUri(baseURI).basePath(userPath).when().delete(userID).
-                then().assertThat().statusCode(SC_OK).log().all();
+        try{
+            given().baseUri(baseURI).basePath(userPath).when().delete(userID).
+                    then().assertThat().statusCode(SC_OK).log().all();
+        }catch (Exception e){
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
+        }
     }
 }

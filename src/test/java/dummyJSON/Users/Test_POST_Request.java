@@ -1,4 +1,4 @@
-package gorest.Users;
+package dummyJSON.Users;
 
 import com.jayway.jsonpath.Configuration;
 import io.restassured.http.ContentType;
@@ -69,8 +69,8 @@ public class Test_POST_Request {
                     body(addData).when().post(userAdd).then().assertThat().statusCode(SC_CREATED).log().all();
 
         }catch (Exception e){
-            logger.info("Exception found: ", e);
-            Assert.fail("Exception found: " + e.getMessage(), e);
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 }

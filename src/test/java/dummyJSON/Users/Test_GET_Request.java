@@ -1,4 +1,4 @@
-package gorest.Users;
+package dummyJSON.Users;
 
 import com.jayway.jsonpath.Configuration;
 import io.restassured.http.Method;
@@ -45,8 +45,8 @@ public class Test_GET_Request {
             userPath = properties.getProperty("UserPath");
             token = ssc.getToken();
         }catch (Exception e){
-            logger.error("Exception found at pre-condition: ", e);
-            Assert.fail("Exception found at pre-condition: "+ e.getMessage(), e);
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
     @Test(priority = 0)
@@ -63,8 +63,8 @@ public class Test_GET_Request {
             given().baseUri(baseURI).basePath(userPath).get().then().assertThat().
                     statusCode(SC_OK).body("users.id", IsNull.notNullValue());
         }catch (Exception e){
-            logger.error("Exception found: ", e);
-            Assert.fail("Exception found: "+ e.getMessage(), e);
+            logger.error("Exception: ", e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 
@@ -90,7 +90,7 @@ public class Test_GET_Request {
             */
         }catch (Exception e){
             logger.error("Exception: ", e);
-            Assert.fail("Exception thrown Test case failed :" + e.getMessage(), e);
+            Assert.fail("Exception thrown. Test Case Failed due to: " + e.getMessage(), e);
         }
     }
 
