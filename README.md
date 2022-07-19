@@ -1,4 +1,4 @@
-# BackendAutomation-RestAssured
+# BackendAutomation-RestAssured_Java_TestNG
 
 ## Objective :
 Developed a sample framework which support to develop automation test scripts for API services.
