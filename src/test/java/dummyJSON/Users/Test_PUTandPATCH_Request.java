@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utills.SubSequentCalls;
+import utils.SubSequentCalls;
 
 import java.io.FileInputStream;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package utills;
+package utils;
 
 import org.testng.*;
 import org.testng.xml.XmlSuite;
