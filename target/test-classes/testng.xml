@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite">
+    <listeners>
+        <listener class-name="utils.Listener.LogsTrackerListener"/>
+        <listener class-name="utils.Listener.ListenerClass"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="FakeAPITestCases">
+        <classes>
+            <class name = "dummyJSON.Login.Login"/>
+            <class name="dummyJSON.Users.Test_GET_Request"/>
+            <class name="dummyJSON.Users.Test_POST_Request"/>
+            <class name="dummyJSON.Users.Test_PUTandPATCH_Request"/>
+            <class name="dummyJSON.Users.Test_DELETE_Request"/>
+            <class name="dummyJSON.DataDrivenApproach.CreateBulkUsers"/>
+        </classes>
+    </test>
+</suite>
